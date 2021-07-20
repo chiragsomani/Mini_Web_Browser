@@ -1,0 +1,40 @@
+import javax.swing.*;
+import javafx.embed.swing.*;
+import javafx.scene.web.WebView;
+import javafx.scene.Scene;
+import javafx.application.Platform;
+
+public class webBrowser extends JFrame implements Runnable{
+	
+	private JFXPanel panel;
+	
+	public void run(){
+		//functions of JFrame class
+		setTitle("Search");
+		// to set frame size. first two are coordinates of where to start, origin is top lef
+		setBounds(0, 0, 1950, 1080);
+		// swing frame's by default visibility is false
+		setVisible(true);
+		
+		panel = new JFXPanel();
+		add(panel); // add method to add any component to frame
+		
+		
+		Platform.runLater( () -> {
+			WebView view = new WebView(); // class inside another javafx package
+		
+			view.getEngine().load("http://www.google.com");
+			/* getEngine returns search engine and load function will then automatically load the given 
+			 * website given in argument */
+		
+			panel.setScene(new Scene(view));
+		});
+		
+	}
+	
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		SwingUtilities.invokeLater(new webBrowser());
+	}
+
+}
